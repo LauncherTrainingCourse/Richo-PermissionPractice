@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">PermissionPractice</string>
+    <string name="permissions_not_granted">To let the app works, allow location permission.</string>
 </resources>
