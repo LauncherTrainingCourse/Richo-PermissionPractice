@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">PermissionPractice</string>
+    <string name="app_name">Permission Practice</string>
     <string name="permissions_not_granted">To let the app works, allow permission.</string>
     <string name="title_activity_image_provider">ImageProviderActivity</string>
     
