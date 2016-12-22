@@ -65,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
 
                 } else {
-
+                    showDeniedSnackBar();
                 }
                 return;
             case MY_PERMISSIONS_REQUEST_STORAGE:
@@ -73,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
 
                 } else {
-
+                    showDeniedSnackBar();
                 }
                 return;
             case MY_PERMISSIONS_REQUEST_LOCATION:
@@ -119,7 +119,7 @@ public class MainActivity extends AppCompatActivity {
             if (ActivityCompat.shouldShowRequestPermissionRationale(this,
                     Manifest.permission.CAMERA)) {
                 Log.d(TAG, "Explanation needed!");
-
+                showDeniedSnackBar();
             } else {
                 ActivityCompat.requestPermissions(this,
                         new String[]{Manifest.permission.CAMERA},
@@ -136,7 +136,7 @@ public class MainActivity extends AppCompatActivity {
             if (ActivityCompat.shouldShowRequestPermissionRationale(this,
                     Manifest.permission_group.STORAGE)) {
                 Log.d(TAG, "Explanation needed!");
-
+                showDeniedSnackBar();
             } else {
                 ActivityCompat.requestPermissions(this,
                         new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE},
