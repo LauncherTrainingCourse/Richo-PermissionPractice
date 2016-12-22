@@ -23,7 +23,6 @@ public class MainActivity extends AppCompatActivity {
 
     private FloatingActionMenu mMenu;
     private FloatingActionButton cameraActionButton, fileActionButton;
-    private View mView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +37,12 @@ public class MainActivity extends AppCompatActivity {
         fileActionButton.setOnClickListener(clickListener);
 
         requestLocationPermission();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        
     }
 
     @Override
@@ -66,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
 
                 } else {
                     Log.i("Tag", "LOCATION permission was NOT granted.");
-                    deniedSnackBar();
+                    showDeniedSnackBar();
                 }
                 return;
         }
@@ -133,7 +138,7 @@ public class MainActivity extends AppCompatActivity {
                     Manifest.permission.ACCESS_COARSE_LOCATION)) {
 
                 Log.d("Tag", "LOCATION Permission explanation needed!");
-                deniedSnackBar();
+                showDeniedSnackBar();
             } else {
                 ActivityCompat.requestPermissions(this,
                         new String[]{Manifest.permission.ACCESS_COARSE_LOCATION},
@@ -142,7 +147,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private void deniedSnackBar() {
+    private void showDeniedSnackBar() {
         Snackbar snackbar = Snackbar
                 .make(this.findViewById(android.R.id.content), R.string.permissions_not_granted, Snackbar.LENGTH_LONG)
                 .setAction("SETTINGS", new View.OnClickListener() {
