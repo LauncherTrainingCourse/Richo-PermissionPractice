@@ -47,8 +47,8 @@ public class MainActivity extends AppCompatActivity {
         try {
             PackageInfo info = getPackageManager().getPackageInfo(getPackageName(), PackageManager.GET_PERMISSIONS);
             if(info.requestedPermissions != null) {
-                for(String p : info.requestedPermissions) {
-                    Log.d(TAG, p);
+                for(String permission : info.requestedPermissions) {
+                    Log.d(TAG, permission + " granted: " + isPermissionGranted(permission));
                 }
             }
         } catch (PackageManager.NameNotFoundException e) {
@@ -105,6 +105,11 @@ public class MainActivity extends AppCompatActivity {
             mMenu.close(true);
         }
     };
+
+    private boolean isPermissionGranted(String permission) {
+        int permissionState = ContextCompat.checkSelfPermission(this, permission);
+        return (permissionState == PackageManager.PERMISSION_GRANTED);
+    }
 
     private void requestCameraPermission() {
         if(ContextCompat.checkSelfPermission(this,
