@@ -2,6 +2,7 @@ package com.example.richo.permissionpractice;
 
 import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.provider.Settings;
@@ -17,6 +18,7 @@ import com.github.clans.fab.FloatingActionButton;
 import com.github.clans.fab.FloatingActionMenu;
 
 public class MainActivity extends AppCompatActivity {
+    public final static String TAG = MainActivity.class.getSimpleName();
     private static final int MY_PERMISSIONS_REQUEST_CAMERA = 1;
     private static final int MY_PERMISSIONS_REQUEST_STORAGE = 2;
     private static final int MY_PERMISSIONS_REQUEST_LOCATION = 3;
@@ -42,7 +44,16 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStop() {
         super.onStop();
-        
+        try {
+            PackageInfo info = getPackageManager().getPackageInfo(getPackageName(), PackageManager.GET_PERMISSIONS);
+            if(info.requestedPermissions != null) {
+                for(String p : info.requestedPermissions) {
+                    Log.d(TAG, p);
+                }
+            }
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -70,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
 
                 } else {
-                    Log.i("Tag", "LOCATION permission was NOT granted.");
+                    Log.i(TAG, "LOCATION permission was NOT granted.");
                     showDeniedSnackBar();
                 }
                 return;
@@ -102,7 +113,7 @@ public class MainActivity extends AppCompatActivity {
 
             if (ActivityCompat.shouldShowRequestPermissionRationale(this,
                     Manifest.permission.CAMERA)) {
-                Log.d("Tag", "Explanation needed!");
+                Log.d(TAG, "Explanation needed!");
 
             } else {
                 ActivityCompat.requestPermissions(this,
@@ -119,7 +130,7 @@ public class MainActivity extends AppCompatActivity {
 
             if (ActivityCompat.shouldShowRequestPermissionRationale(this,
                     Manifest.permission_group.STORAGE)) {
-                Log.d("Tag", "Explanation needed!");
+                Log.d(TAG, "Explanation needed!");
 
             } else {
                 ActivityCompat.requestPermissions(this,
@@ -137,7 +148,7 @@ public class MainActivity extends AppCompatActivity {
             if (ActivityCompat.shouldShowRequestPermissionRationale(this,
                     Manifest.permission.ACCESS_COARSE_LOCATION)) {
 
-                Log.d("Tag", "LOCATION Permission explanation needed!");
+                Log.d(TAG, "LOCATION Permission explanation needed!");
                 showDeniedSnackBar();
             } else {
                 ActivityCompat.requestPermissions(this,
