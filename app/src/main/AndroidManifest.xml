@@ -2,10 +2,17 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.richo.permissionpractice">
 
-    <uses-permission android:name="android.permission.CAMERA"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
+    <permission
+        android:name="com.example.richo.permissionpractice.permission.IMAGE_PROVIDER_ACTIVITY"
+        android:label="@string/permlab_imageProviderActivity"
+        android:description="@string/permdesc_imageProviderActivity"
+        android:permissionGroup="android.permission-group.CAMERA"
+        android:protectionLevel="dangerous" />
 
     <application
         android:allowBackup="true"
@@ -16,8 +23,17 @@
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".ImageProviderActivity"
+            android:permission="com.example.richo.permissionpractice.permission.IMAGE_PROVIDER_ACTIVITY">
+            <intent-filter>
+                <category android:name="android.intent.category.DEFAULT" />
+                <action android:name="android.intent.action.RUN" />
+                <data android:mimeType="text/plain" />
             </intent-filter>
         </activity>
     </application>
