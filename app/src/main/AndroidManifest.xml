@@ -10,8 +10,8 @@
 
     <permission
         android:name="com.example.richo.permissionpractice.permission.IMAGE_PROVIDER_ACTIVITY"
-        android:label="@string/permlab_imageProviderActivity"
         android:description="@string/permdesc_imageProviderActivity"
+        android:label="@string/permlab_imageProviderActivity"
         android:permissionGroup="android.permission-group.CAMERA"
         android:protectionLevel="dangerous" />
 
@@ -24,19 +24,22 @@
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".ImageProviderActivity"
             android:permission="com.example.richo.permissionpractice.permission.IMAGE_PROVIDER_ACTIVITY">
             <intent-filter>
                 <category android:name="android.intent.category.DEFAULT" />
+
                 <action android:name="android.intent.action.RUN" />
+
                 <data android:mimeType="text/plain" />
             </intent-filter>
         </activity>
+        <activity android:name=".CameraActivity"></activity>
     </application>
 
 </manifest>

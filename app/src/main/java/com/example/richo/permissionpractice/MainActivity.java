@@ -66,7 +66,10 @@ public class MainActivity extends AppCompatActivity {
                 if (grantResults.length > 0
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
 
+
+                    loadCamera();
                 } else {
+                    
                     showDeniedSnackBar();
                 }
                 return;
@@ -130,6 +133,8 @@ public class MainActivity extends AppCompatActivity {
                         new String[]{Manifest.permission.CAMERA},
                         MY_PERMISSIONS_REQUEST_CAMERA);
             }
+        } else {
+            loadCamera();
         }
     }
 
@@ -201,5 +206,10 @@ public class MainActivity extends AppCompatActivity {
                 .beginTransaction()
                 .add(R.id.content_panel, fragment)
                 .commit();
+    }
+
+    private void loadCamera() {
+        Intent intent = new Intent(this, CameraActivity.class);
+        startActivity(intent);
     }
 }
