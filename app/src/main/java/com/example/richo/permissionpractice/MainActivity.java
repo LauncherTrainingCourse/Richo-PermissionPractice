@@ -21,8 +21,7 @@ import com.github.clans.fab.FloatingActionMenu;
 public class MainActivity extends AppCompatActivity {
     public final static String TAG = MainActivity.class.getSimpleName();
     private static final int MY_PERMISSIONS_REQUEST_CAMERA = 1;
-    private static final int MY_PERMISSIONS_REQUEST_STORAGE = 2;
-    private static final int MY_PERMISSIONS_REQUEST_LOCATION = 3;
+    private static final int MY_PERMISSIONS_REQUEST_INITIAL = 2;
 
     private FloatingActionMenu mMenu;
     private FloatingActionButton cameraActionButton, fileActionButton;
@@ -40,7 +39,8 @@ public class MainActivity extends AppCompatActivity {
         cameraActionButton.setOnClickListener(clickListener);
         fileActionButton.setOnClickListener(clickListener);
 
-        requestLocationPermission();
+//        requestLocationPermission();
+        loadInitialPermissions();
     }
 
     @Override
@@ -69,26 +69,27 @@ public class MainActivity extends AppCompatActivity {
 
                     loadCamera();
                 } else {
-                    
+
                     showDeniedSnackBar();
                 }
                 return;
-            case MY_PERMISSIONS_REQUEST_STORAGE:
-                if (grantResults.length > 0
-                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-
+            case MY_PERMISSIONS_REQUEST_INITIAL:
+                if (grantResults.length > 0) {
+                    boolean granted = true;
+                    for(int result : grantResults){
+                        if(result != PackageManager.PERMISSION_GRANTED){
+                            granted = false;
+                        }
+                    }
+                    if(granted){
+                        showLocationBasedPhotos();
+                    } else {
+                        showDeniedSnackBar();
+                        showLocationUnauthorized();
+                    }
                 } else {
-                    showDeniedSnackBar();
-                }
-                return;
-            case MY_PERMISSIONS_REQUEST_LOCATION:
-                if (grantResults.length > 0
-                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
 
-                    showLocationBasedPhotos();
-                } else {
-
-                    Log.i(TAG, "LOCATION permission was NOT granted.");
+                    Log.i(TAG, "Permission was NOT granted.");
                     showDeniedSnackBar();
                     showLocationUnauthorized();
                 }
@@ -150,7 +151,7 @@ public class MainActivity extends AppCompatActivity {
             } else {
                 ActivityCompat.requestPermissions(this,
                         new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE},
-                        MY_PERMISSIONS_REQUEST_STORAGE);
+                        MY_PERMISSIONS_REQUEST_INITIAL);
             }
         }
     }
@@ -169,7 +170,29 @@ public class MainActivity extends AppCompatActivity {
             } else {
                 ActivityCompat.requestPermissions(this,
                         new String[]{Manifest.permission.ACCESS_COARSE_LOCATION},
-                        MY_PERMISSIONS_REQUEST_LOCATION);
+                        MY_PERMISSIONS_REQUEST_INITIAL);
+            }
+        } else {
+            showLocationBasedPhotos();
+        }
+    }
+
+    private void loadInitialPermissions() {
+        if(!isPermissionGranted(Manifest.permission.ACCESS_COARSE_LOCATION) ||
+                !isPermissionGranted(Manifest.permission_group.STORAGE)) {
+
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this,
+                    Manifest.permission.ACCESS_COARSE_LOCATION)) {
+
+                Log.d(TAG, "Initial Permission explanation needed!");
+                showDeniedSnackBar();
+                showLocationUnauthorized();
+            } else {
+                ActivityCompat.requestPermissions(this,
+                        new String[]{Manifest.permission.ACCESS_COARSE_LOCATION,
+                                Manifest.permission.READ_EXTERNAL_STORAGE,
+                                Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                        MY_PERMISSIONS_REQUEST_INITIAL);
             }
         } else {
             showLocationBasedPhotos();

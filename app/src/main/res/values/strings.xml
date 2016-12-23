@@ -6,5 +6,5 @@
     <string name="permlab_imageProviderActivity">Customized permission</string>
     <string name="permdesc_imageProviderActivity"></string>
 
-    <string name="user_msg_no_location_permission">Sorry, no LOCATION permission granted.</string>
+    <string name="user_msg_no_location_permission">Sorry, some permissions are NOT granted.</string>
 </resources>
