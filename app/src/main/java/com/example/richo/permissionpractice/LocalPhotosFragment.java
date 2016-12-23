@@ -6,24 +6,34 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.GridView;
+
+import java.util.ArrayList;
 
 
 /**
  * A simple {@link Fragment} subclass.
+ * Sample query: "https://pixabay.com/api/?key=4091555-aa95abdd3d9b6ff1ce2e35859&q=architecture&image_type=photo&category=buildings"
  */
 public class LocalPhotosFragment extends Fragment {
-
+    PhotoAdapter mAdapter;
 
     public LocalPhotosFragment() {
         // Required empty public constructor
     }
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_local_photos, container, false);
+        View view = inflater.inflate(R.layout.fragment_local_photos, container, false);
+
+        ArrayList<String> photos = new ArrayList<>();
+        mAdapter = new PhotoAdapter(getContext(), photos);
+
+        GridView gridView = (GridView) view.findViewById(R.id.photos_view);
+        gridView.setAdapter(mAdapter);
+
+        return view;
     }
 
 }
