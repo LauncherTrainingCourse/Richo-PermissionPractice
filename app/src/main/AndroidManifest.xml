@@ -39,7 +39,10 @@
                 <data android:mimeType="text/plain" />
             </intent-filter>
         </activity>
-        <activity android:name=".CameraActivity"></activity>
+        <activity
+            android:name=".CameraActivity"
+            android:screenOrientation="landscape">
+        </activity>
     </application>
 
 </manifest>
