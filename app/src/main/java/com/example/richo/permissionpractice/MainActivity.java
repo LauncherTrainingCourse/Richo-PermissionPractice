@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
     private static final int MY_PERMISSIONS_REQUEST_INITIAL = 2;
 
     private FloatingActionMenu mMenu;
-    private FloatingActionButton cameraActionButton, fileActionButton;
+    private FloatingActionButton cameraActionButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,12 +34,8 @@ public class MainActivity extends AppCompatActivity {
 
         mMenu = (FloatingActionMenu) findViewById(R.id.menu);
         cameraActionButton = (FloatingActionButton) findViewById(R.id.camera_item);
-        fileActionButton = (FloatingActionButton) findViewById(R.id.file_item);
-
         cameraActionButton.setOnClickListener(clickListener);
-        fileActionButton.setOnClickListener(clickListener);
 
-//        requestLocationPermission();
         loadInitialPermissions();
     }
 
@@ -104,9 +100,6 @@ public class MainActivity extends AppCompatActivity {
                 case R.id.camera_item:
                     requestCameraPermission();
                     break;
-                case R.id.file_item:
-                    requestStoragePermission();
-                    break;
                 default:
                     break;
             }
@@ -136,44 +129,6 @@ public class MainActivity extends AppCompatActivity {
             }
         } else {
             loadCamera();
-        }
-    }
-
-    private void requestStoragePermission() {
-        if(ContextCompat.checkSelfPermission(this,
-                Manifest.permission_group.STORAGE)
-                != PackageManager.PERMISSION_GRANTED) {
-
-            if (ActivityCompat.shouldShowRequestPermissionRationale(this,
-                    Manifest.permission_group.STORAGE)) {
-                Log.d(TAG, "Explanation needed!");
-                showDeniedSnackBar();
-            } else {
-                ActivityCompat.requestPermissions(this,
-                        new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE},
-                        MY_PERMISSIONS_REQUEST_INITIAL);
-            }
-        }
-    }
-
-    private void requestLocationPermission() {
-        if(ContextCompat.checkSelfPermission(this,
-                Manifest.permission.ACCESS_COARSE_LOCATION)
-                != PackageManager.PERMISSION_GRANTED) {
-
-            if (ActivityCompat.shouldShowRequestPermissionRationale(this,
-                    Manifest.permission.ACCESS_COARSE_LOCATION)) {
-
-                Log.d(TAG, "LOCATION Permission explanation needed!");
-                showDeniedSnackBar();
-                showLocationUnauthorized();
-            } else {
-                ActivityCompat.requestPermissions(this,
-                        new String[]{Manifest.permission.ACCESS_COARSE_LOCATION},
-                        MY_PERMISSIONS_REQUEST_INITIAL);
-            }
-        } else {
-            showLocationBasedPhotos();
         }
     }
 
