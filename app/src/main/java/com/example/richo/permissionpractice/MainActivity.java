@@ -14,6 +14,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
+import com.facebook.drawee.backends.pipeline.Fresco;
 import com.github.clans.fab.FloatingActionButton;
 import com.github.clans.fab.FloatingActionMenu;
 
@@ -29,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Fresco.initialize(this);
         setContentView(R.layout.activity_main);
 
         mMenu = (FloatingActionMenu) findViewById(R.id.menu);
@@ -82,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
 
                     showLocationBasedPhotos();
                 } else {
-                    
+
                     Log.i(TAG, "LOCATION permission was NOT granted.");
                     showDeniedSnackBar();
                     showLocationUnauthorized();
@@ -164,6 +166,8 @@ public class MainActivity extends AppCompatActivity {
                         new String[]{Manifest.permission.ACCESS_COARSE_LOCATION},
                         MY_PERMISSIONS_REQUEST_LOCATION);
             }
+        } else {
+            showLocationBasedPhotos();
         }
     }
 
