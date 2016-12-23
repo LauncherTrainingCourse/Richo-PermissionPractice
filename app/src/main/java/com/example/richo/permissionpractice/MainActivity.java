@@ -83,6 +83,7 @@ public class MainActivity extends AppCompatActivity {
                 } else {
                     Log.i(TAG, "LOCATION permission was NOT granted.");
                     showDeniedSnackBar();
+                    showLocationUnauthorized();
                 }
                 return;
         }
@@ -155,6 +156,7 @@ public class MainActivity extends AppCompatActivity {
 
                 Log.d(TAG, "LOCATION Permission explanation needed!");
                 showDeniedSnackBar();
+                showLocationUnauthorized();
             } else {
                 ActivityCompat.requestPermissions(this,
                         new String[]{Manifest.permission.ACCESS_COARSE_LOCATION},
@@ -177,5 +179,13 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
         snackbar.show();
+    }
+
+    private void showLocationUnauthorized() {
+        UserMessageFragment fragment = new UserMessageFragment();
+        getSupportFragmentManager()
+                .beginTransaction()
+                .add(R.id.content_panel, fragment)
+                .commit();
     }
 }
