@@ -80,7 +80,9 @@ public class MainActivity extends AppCompatActivity {
                 if (grantResults.length > 0
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
 
+                    showLocationBasedPhotos();
                 } else {
+                    
                     Log.i(TAG, "LOCATION permission was NOT granted.");
                     showDeniedSnackBar();
                     showLocationUnauthorized();
@@ -183,6 +185,14 @@ public class MainActivity extends AppCompatActivity {
 
     private void showLocationUnauthorized() {
         UserMessageFragment fragment = new UserMessageFragment();
+        getSupportFragmentManager()
+                .beginTransaction()
+                .add(R.id.content_panel, fragment)
+                .commit();
+    }
+
+    private void showLocationBasedPhotos() {
+        LocalPhotosFragment fragment = new LocalPhotosFragment();
         getSupportFragmentManager()
                 .beginTransaction()
                 .add(R.id.content_panel, fragment)
