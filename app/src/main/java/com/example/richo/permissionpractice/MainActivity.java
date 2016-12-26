@@ -114,10 +114,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void requestCameraPermission() {
-        if(ContextCompat.checkSelfPermission(this,
-                Manifest.permission.CAMERA)
-                != PackageManager.PERMISSION_GRANTED) {
-
+        if(!isPermissionGranted(Manifest.permission.CAMERA)) {
             if (ActivityCompat.shouldShowRequestPermissionRationale(this,
                     Manifest.permission.CAMERA)) {
                 Log.d(TAG, "Explanation needed!");
