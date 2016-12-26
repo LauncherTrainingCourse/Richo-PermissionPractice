@@ -182,7 +182,7 @@ public class MainActivity extends AppCompatActivity {
         LocalPhotosFragment fragment = new LocalPhotosFragment();
         getSupportFragmentManager()
                 .beginTransaction()
-                .add(R.id.content_panel, fragment)
+                .replace(R.id.content_panel, fragment)
                 .commit();
     }
 

@@ -3,6 +3,7 @@ package com.example.richo.permissionpractice;
 
 import android.content.Context;
 import android.graphics.Point;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.Display;
@@ -34,6 +35,9 @@ public class LocalPhotosFragment extends Fragment {
         ArrayList<String> photos = new ArrayList<>();
         mAdapter = new PhotoAdapter(getContext(), photos);
 
+        AsyncLoadPhotosTask task = new AsyncLoadPhotosTask();
+        task.execute();
+
         WindowManager wm = (WindowManager) getContext().getSystemService(Context.WINDOW_SERVICE);
         Display display = wm.getDefaultDisplay();
         Point size = new Point();
@@ -45,6 +49,34 @@ public class LocalPhotosFragment extends Fragment {
         gridView.setAdapter(mAdapter);
 
         return view;
+    }
+
+    private class AsyncLoadPhotosTask extends AsyncTask<Void, Void, Void> {
+        ArrayList<String> list = new ArrayList<>();
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            PhotoHelper helper = new PhotoHelper();
+            list = helper.loadPhotos();
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+
+            getActivity().runOnUiThread(
+                    new Runnable() {
+                        @Override
+                        public void run() {
+                            for(String url : list) {
+                                mAdapter.add(url);
+                            }
+                        }
+                    }
+            );
+        }
     }
 
 }
