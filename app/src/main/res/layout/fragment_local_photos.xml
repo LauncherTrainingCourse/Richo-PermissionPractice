@@ -1,0 +1,16 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.richo.permissionpractice.LocalPhotosFragment">
+
+    <GridView
+        android:id="@+id/photos_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:numColumns="auto_fit"
+        android:verticalSpacing="2dp"
+        android:horizontalSpacing="0dp"
+        android:stretchMode="none"
+        android:gravity="center" />
+</LinearLayout>

@@ -1,3 +1,10 @@
 <resources>
-    <string name="app_name">PermissionPractice</string>
+    <string name="app_name">Permission Practice</string>
+    <string name="permissions_not_granted">To let the app works, allow permission.</string>
+    <string name="title_activity_image_provider">ImageProviderActivity</string>
+
+    <string name="permlab_imageProviderActivity">Customized permission</string>
+    <string name="permdesc_imageProviderActivity"></string>
+
+    <string name="user_msg_no_location_permission">Sorry, some permissions are NOT granted.</string>
 </resources>
