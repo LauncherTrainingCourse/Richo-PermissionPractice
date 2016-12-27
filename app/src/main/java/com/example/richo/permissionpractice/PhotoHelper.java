@@ -38,13 +38,25 @@ public class PhotoHelper {
     }
 
     String run() throws IOException {
+//        HttpUrl httpUrl = new HttpUrl.Builder()
+//                .scheme("https")
+//                .host("api.flickr.com")
+//                .addPathSegment("services")
+//                .addPathSegment("rest")
+//                .addQueryParameter("method", "flickr.photos.getRecent")
+//                .addQueryParameter("api_key", "42dbd5bcdb2964a243d8c50ab93fb96c")
+//                .addQueryParameter("format", "json")
+//                .addQueryParameter("nojsoncallback", "?")
+//                .build();
+
         HttpUrl httpUrl = new HttpUrl.Builder()
                 .scheme("https")
                 .host("api.flickr.com")
                 .addPathSegment("services")
                 .addPathSegment("rest")
-                .addQueryParameter("method", "flickr.photos.getRecent")
+                .addQueryParameter("method", "flickr.photos.search")
                 .addQueryParameter("api_key", "42dbd5bcdb2964a243d8c50ab93fb96c")
+                .addQueryParameter("tags", "landscape")
                 .addQueryParameter("format", "json")
                 .addQueryParameter("nojsoncallback", "?")
                 .build();
