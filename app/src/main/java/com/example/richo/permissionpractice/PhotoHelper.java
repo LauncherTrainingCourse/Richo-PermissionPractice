@@ -1,22 +1,11 @@
 package com.example.richo.permissionpractice;
 
-import android.util.Log;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
-import java.security.KeyManagementException;
-import java.security.NoSuchAlgorithmException;
-import java.security.SecureRandom;
-import java.security.cert.X509Certificate;
 import java.util.ArrayList;
-
-import javax.net.ssl.SSLContext;
-import javax.net.ssl.SSLSocketFactory;
-import javax.net.ssl.TrustManager;
-import javax.net.ssl.X509TrustManager;
 
 import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
@@ -38,17 +27,6 @@ public class PhotoHelper {
     }
 
     String run() throws IOException {
-//        HttpUrl httpUrl = new HttpUrl.Builder()
-//                .scheme("https")
-//                .host("api.flickr.com")
-//                .addPathSegment("services")
-//                .addPathSegment("rest")
-//                .addQueryParameter("method", "flickr.photos.getRecent")
-//                .addQueryParameter("api_key", "42dbd5bcdb2964a243d8c50ab93fb96c")
-//                .addQueryParameter("format", "json")
-//                .addQueryParameter("nojsoncallback", "?")
-//                .build();
-
         HttpUrl httpUrl = new HttpUrl.Builder()
                 .scheme("https")
                 .host("api.flickr.com")
